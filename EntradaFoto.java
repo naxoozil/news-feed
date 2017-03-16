@@ -1,70 +1,54 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 /**
  * 
  */
-public class EntradaFoto
+public class EntradaFoto extends Entrada
 {
-    // instance variables - replace the example below with your own
-    private String usuario;
     private String urlImagen;
     private String titulo;
-    private LocalDateTime momentoPublicacion;
-    private int cantidadMeGusta;
-    private ArrayList <String> comentarios;
+    
 
     /**
      * Constructor for objects of class EntradaTexto
      */
     public EntradaFoto(String autor,String url, String titulo)
     {
-        usuario = autor;
+        super(autor);
         urlImagen = url;
-        this.titulo = titulo;
-        ArrayList<String> comentarios = new ArrayList<String>();
-        cantidadMeGusta = 0;
-        momentoPublicacion = null;
-    }
-
-    /**
-     * Metodo que suma un me gusta
-     */
-    public void meGusta()
-    {
-        cantidadMeGusta++;
-    }
-    
-    public void unlike()
-    {
-        cantidadMeGusta++;
-    }
-    
-    public void addComentario(String text)
-    {
-        comentarios.add(text);
+        this.titulo = titulo;       
     }
     
     public String getUrlImagen()
     {
         return urlImagen;
     }
-    
-    public LocalDateTime getMomentoPublicacion()
+	
+	public String getTituloImagen()
     {
-        return momentoPublicacion;
+        return titulo;
     }
-    
+
     public String toString()
     {
-        String valorToString = "";
-        if(comentarios == null){
-            valorToString = "Esta entrada no tiene comentarios hasta el momento.";
+        String textoDevolver = "";
+        textoDevolver = textoDevolver + "Usuario " + getUsuario() + "\n";
+        textoDevolver = textoDevolver + titulo + "\n";
+        textoDevolver = textoDevolver + urlImagen + "\n";
+        textoDevolver = textoDevolver + getMeGusta() + " me gusta";
+       
+        
+        long segundosPasados = getMomentoPublicacion().until(LocalDateTime.now(),ChronoUnit.SECONDS);
+        long minutosPasados = segundosPasados / 60;
+        long segundosRestantes = segundosPasados % 60;
+        if(minutosPasados == 0){
+            textoDevolver = textoDevolver + " Hace " + segundosPasados + " segundos.";
         }
         else{
-            valorToString = "Usuario: " + usuario + " Url: " + urlImagen + "Momento de la publicación: " 
-                            + momentoPublicacion + " Cantidad de Me Gusta: " + cantidadMeGusta + " Comentarios: "
-                            + comentarios;
+            textoDevolver = textoDevolver + " Hace " + minutosPasados + " minutos y " + segundosRestantes + " segundos.";
         }
-        return valorToString;
+        textoDevolver = textoDevolver + "\n" + getComentarios();
+        return textoDevolver;
     }
 }
