@@ -4,7 +4,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * 
  */
-public class EntradaFoto extends Entrada
+public class EntradaFoto extends Comentarios
 {
     private String urlImagen;
     private String titulo;

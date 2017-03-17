@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 
-public class EntradaTexto extends Entrada
+public class EntradaTexto extends Comentarios
 
 {
     private String mensaje;
