@@ -1,4 +1,5 @@
-
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 /**
  * Write a description of class EntradaUnionAGrupo here.
  * 
@@ -8,26 +9,38 @@
 public class EntradaUnionAGrupo extends Entrada
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private String grupo;
 
     /**
      * Constructor for objects of class EntradaUnionAGrupo
      */
-    public EntradaUnionAGrupo()
+    public EntradaUnionAGrupo(String autor, String grupo)
     {
-        
-        x = 0;
+        super(autor);
+        this.grupo = grupo;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
+    public String toString()
     {
-        // put your code here
-        return x + y;
+        String textoADevolver = "";
+        textoADevolver += super.toString();
+        textoADevolver += "El usuario se ha unido al grupo " + grupo + "\n";
+
+        return textoADevolver;
     }
+    
+    public void mostrar()
+    {
+        System.out.println(this);
+    }
+    
+    public int getCantidadDeDatosAsociadosALaEntrada()
+    {
+        return 4;
+    }
+
+	public void mostrarDatosExclusivos()
+	{
+		System.out.println("El usuario se ha unido al grupo " + grupo + "\n");
+	}
 }

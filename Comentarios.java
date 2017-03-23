@@ -23,11 +23,28 @@ public class Comentarios extends Entrada
     {
         comentarios.add(texto);        
     }
-	
-	public ArrayList<String> getComentarios()
-	{
-		return comentarios;
-	}
+    
+    public ArrayList<String> getComentarios()
+    {
+        return comentarios;
+    }
 
+    public String toString()
+    {
+        String textoADevolver = "";
+        textoADevolver += super.toString();
+        if (getComentarios().isEmpty()) {
+            textoADevolver += "La entrada no tiene comentarios.\n";
+        }
+        else {
+            //Se recopilan los comentarios
+            textoADevolver += "Comentarios:\n";
+            for (String comentario : getComentarios()) {
+                textoADevolver += comentario + "\n";
+            }
+
+        }  
+        return textoADevolver;
+    }
     
 }

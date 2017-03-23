@@ -8,8 +8,6 @@ public class EntradaFoto extends Comentarios
 {
     private String urlImagen;
     private String titulo;
-    
-
     /**
      * Constructor for objects of class EntradaTexto
      */
@@ -17,7 +15,7 @@ public class EntradaFoto extends Comentarios
     {
         super(autor);
         urlImagen = url;
-        this.titulo = titulo;       
+        this.titulo = titulo;
     }
     
     public String getUrlImagen()
@@ -32,23 +30,26 @@ public class EntradaFoto extends Comentarios
 
     public String toString()
     {
-        String textoDevolver = "";
-        textoDevolver = textoDevolver + "Usuario " + getUsuario() + "\n";
-        textoDevolver = textoDevolver + titulo + "\n";
-        textoDevolver = textoDevolver + urlImagen + "\n";
-        textoDevolver = textoDevolver + getMeGusta() + " me gusta";
-       
-        
-        long segundosPasados = getMomentoPublicacion().until(LocalDateTime.now(),ChronoUnit.SECONDS);
-        long minutosPasados = segundosPasados / 60;
-        long segundosRestantes = segundosPasados % 60;
-        if(minutosPasados == 0){
-            textoDevolver = textoDevolver + " Hace " + segundosPasados + " segundos.";
-        }
-        else{
-            textoDevolver = textoDevolver + " Hace " + minutosPasados + " minutos y " + segundosRestantes + " segundos.";
-        }
-        textoDevolver = textoDevolver + "\n" + getComentarios();
-        return textoDevolver;
+        String cadenaADevolver = "";
+        cadenaADevolver += super.toString();
+        cadenaADevolver += titulo + "\n";
+        cadenaADevolver += urlImagen + "\n";
+        return cadenaADevolver;
+
     }
+    
+    public void mostrar()
+    {
+        System.out.println(this);
+    }
+    
+    public int getCantidadDeDatosAsociadosALaEntrada()
+    {
+        return 6;
+    }
+
+	public void mostrarDatosExclusivos()
+	{
+		System.out.println(titulo + "\n" + urlImagen + "\n");
+	}
 }

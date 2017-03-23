@@ -22,29 +22,25 @@ public class EntradaTexto extends Comentarios
     
     public String toString()
     {
-        String textoDevolver = "";
-        textoDevolver = textoDevolver + "Usuario " + getUsuario() + "\n";
-        textoDevolver = textoDevolver + getComentarios() + "\n";
-        textoDevolver = textoDevolver + getMeGusta() + " me gusta";
-        
-        
-        long segundosPasados = getMomentoPublicacion().until(LocalDateTime.now(),ChronoUnit.SECONDS);
-        long minutosPasados = segundosPasados / 60;
-        long segundosRestantes = segundosPasados % 60;
-        if(minutosPasados == 0){
-            textoDevolver = textoDevolver + " Hace " + segundosPasados + " segundos.";
-        }
-        else{
-            textoDevolver = textoDevolver + " Hace " + minutosPasados + " minutos y " + segundosRestantes + " segundos.";
-        }
-        textoDevolver = textoDevolver + "\n" + getComentarios();
-        return textoDevolver;
+        String textoADevolver = "";
+        textoADevolver += super.toString();
+        textoADevolver += mensaje + "\n";
+        return textoADevolver;
     }
 
-    
+    public void mostrar()
+    {
+        System.out.println(this);
+    }
 
-    
+    public int getCantidadDeDatosAsociadosALaEntrada()
+    {
+        return 5;
+    }
 
-
+	public void mostrarDatosExclusivos()
+	{
+		System.out.println(mensaje + "\n");
+	}
 
 }

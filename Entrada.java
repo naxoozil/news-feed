@@ -42,10 +42,32 @@ public class Entrada
         return momentoPublicacion;
     }
 
-    
     public String toString()
     {
-		String valorADevolver = "";
-        return valorADevolver;
+        String cadenaADevolver = "";
+        cadenaADevolver += "Usuario: " + getUsuario() + "\n";
+        cadenaADevolver += getMeGusta() + " me gusta\n";
+        
+        long segundosQueHanPasadoDesdeCreacion = getMomentoPublicacion().until(LocalDateTime.now(), ChronoUnit.SECONDS);
+        long minutosQueHanPasadoDesdeCreacion = segundosQueHanPasadoDesdeCreacion / 60;
+        long segundosResiduales = segundosQueHanPasadoDesdeCreacion % 60;
+        
+        cadenaADevolver += "Hace ";
+        if (minutosQueHanPasadoDesdeCreacion > 0) {
+            cadenaADevolver += minutosQueHanPasadoDesdeCreacion + " minutos ";
+        }
+        cadenaADevolver += segundosResiduales + " segundos.\n";                
+        
+        return cadenaADevolver;
+    }
+    
+    public void mostrar()
+    {
+        
+    }
+    
+    public int getCantidadDeDatosAsociadosALaEntrada()
+    {
+        return 0;
     }
 }
