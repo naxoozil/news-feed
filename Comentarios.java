@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Comentarios extends Entrada
+public abstract class Comentarios extends Entrada
 {
     // instance variables - replace the example below with your own
     private ArrayList<String> comentarios;
@@ -34,13 +34,13 @@ public class Comentarios extends Entrada
         String textoADevolver = "";
         textoADevolver += super.toString();
         if (getComentarios().isEmpty()) {
-            textoADevolver += "La entrada no tiene comentarios.\n";
+            textoADevolver += "<em>La entrada no tiene comentarios.</em><br/>";
         }
         else {
             //Se recopilan los comentarios
-            textoADevolver += "Comentarios:\n";
+            textoADevolver += "Comentarios:<br/>";
             for (String comentario : getComentarios()) {
-                textoADevolver += comentario + "\n";
+                textoADevolver += comentario + "<br/>";
             }
 
         }  

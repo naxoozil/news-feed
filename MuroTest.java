@@ -37,6 +37,22 @@ public class MuroTest
     
     
 
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
     /**
      * Default constructor for test class MuroTest
      */
@@ -64,6 +80,7 @@ public class MuroTest
         muro1.addEntradaTexto(entradaU1);
         muro1.addEntradaTexto(entradaU2);
         muro1.addEntradaTexto(entradaT2);
+        muro1.mostrarMuroEnNavegador();
     }
 
     /**

@@ -32,8 +32,8 @@ public class EntradaFoto extends Comentarios
     {
         String cadenaADevolver = "";
         cadenaADevolver += super.toString();
-        cadenaADevolver += titulo + "\n";
-        cadenaADevolver += urlImagen + "\n";
+        cadenaADevolver += titulo + "<br/>";
+        cadenaADevolver += urlImagen + "<br/>";
         return cadenaADevolver;
 
     }

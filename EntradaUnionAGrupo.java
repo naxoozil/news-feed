@@ -24,7 +24,7 @@ public class EntradaUnionAGrupo extends Entrada
     {
         String textoADevolver = "";
         textoADevolver += super.toString();
-        textoADevolver += "El usuario se ha unido al grupo " + grupo + "\n";
+        textoADevolver += "<em><strong>El usuario se ha unido al grupo</strong></em> " + grupo + "<br/>";
 
         return textoADevolver;
     }

@@ -24,7 +24,7 @@ public class EntradaTexto extends Comentarios
     {
         String textoADevolver = "";
         textoADevolver += super.toString();
-        textoADevolver += mensaje + "\n";
+        textoADevolver += mensaje + "<br/>";
         return textoADevolver;
     }
 
