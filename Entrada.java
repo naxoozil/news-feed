@@ -47,15 +47,23 @@ public abstract class Entrada
         cadenaADevolver += "Usuario: " + getUsuario() + "<br/>";
         cadenaADevolver += getMeGusta() + " <em>me gusta</em> <br/>";
         
-        long segundosQueHanPasadoDesdeCreacion = getMomentoPublicacion().until(LocalDateTime.now(), ChronoUnit.SECONDS);
-        long minutosQueHanPasadoDesdeCreacion = segundosQueHanPasadoDesdeCreacion / 60;
-        long segundosResiduales = segundosQueHanPasadoDesdeCreacion % 60;
+        long segundosQueHanPasado = getMomentoPublicacion().until(LocalDateTime.now(),ChronoUnit.SECONDS);
+        long minutosQueHanPasado = segundosQueHanPasado / 60;
+        long segundosResiduales = segundosQueHanPasado % 60;
+        long horasQueHanPasado = minutosQueHanPasado / 60;
+        long diasQueHanPasado = horasQueHanPasado / 24;
         
         cadenaADevolver += "Hace ";
-        if (minutosQueHanPasadoDesdeCreacion > 0) {
-            cadenaADevolver += minutosQueHanPasadoDesdeCreacion + " minutos ";
+        if(minutosQueHanPasado > 0 )
+        {
+            if(diasQueHanPasado>=1){
+                cadenaADevolver += diasQueHanPasado + " dias";
+            }
+            else if (minutosQueHanPasado > 1440 && minutosQueHanPasado > 0){
+                cadenaADevolver += diasQueHanPasado + " minutos";
+            }
         }
-        cadenaADevolver += segundosResiduales + " segundos. <br/>";                
+        cadenaADevolver += segundosResiduales + " segundos. <br/>";
         
         return cadenaADevolver;
     }

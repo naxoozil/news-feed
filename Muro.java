@@ -1,9 +1,12 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.io.*;
 /**
  * Write a description of class Muro here.
  * 
@@ -61,6 +64,7 @@ public class Muro
         {
             if(entrada.getClass().getSimpleName() == tipoEntradaABuscar){
                 if(entrada.getUsuario() == nombreAutor){
+                    
                     switch(entrada.getClass().getSimpleName())
                     {
                         case "EntradaTexto":
@@ -69,7 +73,7 @@ public class Muro
                         break;
                         case "EntradaFoto":
 
-                        ((EntradaFoto)entrada).mostrarDatosExclusivos();	
+                        ((EntradaFoto)entrada).mostrarDatosExclusivos();    
                         break;
                         case "EntradaUnionAGrupo":
 
@@ -107,7 +111,7 @@ public class Muro
        
         try 
         {
-            String cmd = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome "+"muroAGuardar.html" ;
+            String cmd = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome "+ "muroAGuardar.html" ;
             Runtime.getRuntime().exec(cmd); 
         } 
         catch (IOException ioe) 
@@ -115,6 +119,124 @@ public class Muro
           System.out.println (ioe);
         }
 
+    }
+    
+    public void mostrarMuroNavegadorSegundaParte(String autor)
+    {
+        try{
+            URL url = new URL("https://script.google.com/macros/s/AKfycbzHc3p1twTfyF7o0_cxSwnxSsyOemuHnSu406ly9DZIf5Ck2BA/exec?user=" + autor);
+            Scanner sc = new Scanner(url.openStream());
+            int cont = 0;
+            while (sc.hasNextLine()) {
+                String lineaLeida= sc.nextLine();
+                String[] muroNavegador = lineaLeida.split(";");
+                
+                switch(entradas.getClass().getSimpleName())
+                {
+                    //En el caso de EntradaTexto
+                    case "EntradaTexto":
+                    
+                    EntradaFoto entradaFoto = new EntradaFoto(muroNavegador[1],muroNavegador[4], muroNavegador[5]);
+                    this.entradas.add(entradaFoto);
+
+                    cont = 0;
+                    while(cont<Integer.parseInt(muroNavegador[2])){
+                        entradaFoto.meGusta();
+                        cont++;
+                    }
+
+                    cont = 0;
+                    muroNavegador[3] = muroNavegador[3].replace("-","/");
+                    muroNavegador[3] = muroNavegador[3].replace(":","/");
+
+                    String fechaYHora[] = muroNavegador[3].split("/");
+                    int[] elementosFechaHora = new int[5];
+                    while(cont < 5){
+                        elementosFechaHora[cont] = Integer.parseInt(fechaYHora[cont]);
+                        cont++;
+                    }
+                    LocalDateTime momentoLeido = LocalDateTime.of(elementosFechaHora[2], elementosFechaHora[1], elementosFechaHora[0], elementosFechaHora[3], elementosFechaHora[4]);
+                    
+
+                    if(!muroNavegador[6].equals("Sin comentarios")){
+                        String comentarios[] = muroNavegador[6].split("%");
+
+                        cont = 0;
+                        while(cont<comentarios.length){
+                            entradaFoto.addComentario(comentarios[cont]);
+                            cont++;
+                        }
+                    }
+                    
+                    break;
+                    //En el caso de EntradaFoto
+                    case "EntradaFoto":
+                    
+                    EntradaTexto entradaTexto = new EntradaTexto(muroNavegador[1],muroNavegador[4]);
+                    this.entradas.add(entradaTexto);
+
+                    cont = 0;
+                    while(cont<Integer.parseInt(muroNavegador[2])){
+                        entradaTexto.meGusta();
+                        cont++;
+                    }
+
+                    cont = 0;
+                    muroNavegador[3] = muroNavegador[3].replace("-","/");
+                    muroNavegador[3] = muroNavegador[3].replace(":","/");
+
+                    String fechaYHoraFoto[] = muroNavegador[3].split("/");
+                    int[] elementosFechaHoraFoto = new int[5];
+                    while(cont < 5){
+                        elementosFechaHoraFoto[cont] = Integer.parseInt(fechaYHoraFoto[cont]);
+                        cont++;
+                    }
+                    LocalDateTime momentoLeidoFoto = LocalDateTime.of(elementosFechaHoraFoto[2], elementosFechaHoraFoto[1], elementosFechaHoraFoto[0], elementosFechaHoraFoto[3], elementosFechaHoraFoto[4]);
+
+                    if(!muroNavegador[5].equals("Sin comentarios")){
+                        String comentarios[] = muroNavegador[5].split("%");
+
+                        cont = 0;
+                        while(cont<comentarios.length){
+                            entradaTexto.addComentario(comentarios[cont]);
+                            cont++;
+                        }
+                    }
+                    
+                    break;
+                    //En el caso de EntradaUnionAGrupo
+                    case "EntradaUnionAGrupo":
+                    
+                    EntradaUnionAGrupo entradaUnionAGrupo = new EntradaUnionAGrupo(muroNavegador[1], muroNavegador[4]);
+                    this.entradas.add(entradaUnionAGrupo);
+
+                    cont = 0;
+                    while(cont < Integer.parseInt(muroNavegador[2])){
+                        entradaUnionAGrupo.meGusta();
+                        cont++;
+                    }
+
+                    cont = 0;
+                    muroNavegador[3] = muroNavegador[3].replace("-","/");
+                    muroNavegador[3] = muroNavegador[3].replace(":","/");
+
+                    String fechaYHoraEnGrupo[] = muroNavegador[3].split("/");
+                    int[] elementosFechaHoraEnGrupo = new int[5];
+                    while(cont < 5){
+                        elementosFechaHoraEnGrupo[cont] = Integer.parseInt(fechaYHoraEnGrupo[cont]);
+                        cont++;
+                    } 
+                    
+                    break;
+                    
+                }
+            }
+            sc.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.mostrarMuroEnNavegador();
     }
 
 }
